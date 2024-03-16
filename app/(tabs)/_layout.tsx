@@ -1,57 +1,179 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
-
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+import React from "react";
+import { Tabs, useRouter } from "expo-router";
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Entypo,
+} from "@expo/vector-icons";
+import { TouchableOpacity, Text } from "react-native";
+import { colors } from "@/constants";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+  const router = useRouter();
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
+        tabBarActiveTintColor: colors.primary,
+        tabBarStyle: {
+          backgroundColor: "black",
+          borderTopColor: "#ffffff30",
+          height: 60,
+          paddingBottom: 10,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerStyle: {
+            backgroundColor: "black",
+            borderBottomColor: "#ffffff30",
+            borderWidth: 0.5,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => router.back()}
+              style={{ paddingLeft: 16 }}
+            >
+              {router.canGoBack() && (
+                <Ionicons
+                  name="chevron-back"
+                  size={20}
+                  color={colors.primary}
+                />
+              )}
+            </TouchableOpacity>
+          ),
           headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+            <Text
+              style={{
+                color: colors.primary,
+                paddingRight: 16,
+              }}
+            >
+              Home
+            </Text>
+          ),
+          tabBarLabel: "Home",
+          headerTitle: "",
+          headerTintColor: colors.primary,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="home" size={24} color={color} />
           ),
         }}
       />
+
       <Tabs.Screen
-        name="two"
+        name="badminton"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerStyle: {
+            backgroundColor: "black",
+            borderBottomColor: "#ffffff30",
+            borderWidth: 0.5,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => router.back()}
+              style={{ paddingLeft: 16 }}
+            >
+              {router.canGoBack() && (
+                <Ionicons
+                  name="chevron-back"
+                  size={20}
+                  color={colors.primary}
+                />
+              )}
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <Text
+              style={{
+                color: colors.primary,
+                paddingRight: 16,
+              }}
+            >
+              Badminton
+            </Text>
+          ),
+          tabBarLabel: "Badminton",
+          headerTitle: "",
+          headerTintColor: colors.primary,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="badminton" size={24} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="support-center"
+        options={{
+          headerStyle: {
+            backgroundColor: "black",
+            borderBottomColor: "#ffffff30",
+            borderWidth: 0.5,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => router.back()}
+              style={{ paddingLeft: 16 }}
+            >
+              {router.canGoBack() && (
+                <Ionicons
+                  name="chevron-back"
+                  size={20}
+                  color={colors.primary}
+                />
+              )}
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <Text style={{ color: colors.primary, paddingRight: 16 }}>
+              Support Center
+            </Text>
+          ),
+          tabBarLabel: "Support Center",
+          headerTitle: "",
+          headerTintColor: "#E18026",
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="support-agent" size={24} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="blogs"
+        options={{
+          headerStyle: {
+            backgroundColor: "black",
+            borderBottomColor: "#ffffff30",
+            borderWidth: 0.5,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => router.back()}
+              style={{ paddingLeft: 16 }}
+            >
+              {router.canGoBack() && (
+                <Ionicons
+                  name="chevron-back"
+                  size={20}
+                  color={colors.primary}
+                />
+              )}
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <Text style={{ color: colors.primary, paddingRight: 16 }}>
+              Blogs
+            </Text>
+          ),
+          tabBarLabel: "Blogs",
+          headerTitle: "",
+          headerTintColor: colors.primary,
+          tabBarIcon: ({ color }) => (
+            <Entypo name="text-document" size={24} color={color} />
+          ),
         }}
       />
     </Tabs>

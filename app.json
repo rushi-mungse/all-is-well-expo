@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "all-is-well",
+    "name": "all is well",
     "slug": "all-is-well",
+    "description": "this is fitness app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -33,7 +34,17 @@
       "expo-router"
     ],
     "experiments": {
-      "typedRoutes": true
-    }
+      "typedRoutes": true,
+      "tsconfigPaths": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "5a7f6e8e-2727-4639-b40b-5426c5c5c986"
+      }
+    },
+    "owner": "rushi_mungse"
   }
 }
